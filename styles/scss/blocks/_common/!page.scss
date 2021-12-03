@@ -1,0 +1,53 @@
+.page {
+
+  position: relative;
+  
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  &__header {
+  }
+
+  &__content {
+    min-height: 100%;
+    flex-grow: 1;
+  }
+
+  &__footer {
+  }
+  
+  &__container {
+    max-width: calc(var(--max-container-width) + 2 * var(--content-padding));
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+  }
+
+  &__title {
+    @extend %fs-h1;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  &__section-title {
+    @extend %fs-h2;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  &__button {
+    border-radius: 2rem;
+    padding: 0.8rem 1.6rem;
+
+    @extend %fs-t1;
+    font-weight: 700;
+    color: $color-contrasting;
+    background: linear-gradient(290deg, #53AA48 30%, #82D174 72%);
+    box-shadow: 0px 9px 50px #406D07;
+    &:hover {
+      color: $color-contrasting;
+    }
+  }
+}

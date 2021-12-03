@@ -1,0 +1,65 @@
+// Адаптивный шрифт
+@mixin clamp($mobile, $desktop) {
+  $diff: $desktop - $mobile;
+  $maxWidth: $maxWidth - $minWidth;
+  font-size: calc(#{$mobile + px} + #{$diff} * ((100vw - #{$minWidth + px}) / #{$maxWidth}));
+}
+
+// Оболочка изображения для задания нужного адаптивного соотношения сторон
+@mixin imageWrapper($width: 16, $height: 9) {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: $height / $width * 100%;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+}
+
+@mixin breakpoint($class) {
+  @if $class == large-desktop {
+      @media only screen and (max-width: (1600px)) {
+          @content;
+      }
+  } @else if $class == desktop {
+      @media only screen and (max-width: (1400px)) {
+          @content;
+      }
+  } @else if $class == laptop {
+      @media only screen and (max-width: (1200px)) {
+          @content;
+      }
+  } @else if $class == tablet {
+      @media only screen and (max-width: (1024px)) {
+          @content;
+      }
+  } @else if $class == small-tablet {
+      @media only screen and (max-width: (768px)) {
+          @content;
+      }
+  } @else if $class == mobile {
+      @media only screen and (max-width: (640px)) {
+          @content;
+      }
+  } @else if $class == small-mobile {
+      @media only screen and (max-width: (576px)) {
+          @content;
+      }
+  } @else if $class == supersmall-mobile {
+      @media only screen and (max-width: (370px)) {
+          @content;
+      }
+  }
+}

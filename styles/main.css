@@ -1,0 +1,253 @@
+.page__title {
+  font-size: calc(24px + 32 * ((100vw - 375px) / 1545));
+}
+
+.page__section-title {
+  font-size: calc(22px + 20 * ((100vw - 375px) / 1545));
+}
+
+.page__button {
+  font-size: calc(16px + 2 * ((100vw - 375px) / 1545));
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+:root {
+  --max-container-width: 168rem;
+  --content-padding: 10rem;
+}
+@media only screen and (max-width: 1024px) {
+  :root {
+    --content-padding: 2.4rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  :root {
+    --content-padding: 1.6rem;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  color: black;
+}
+
+img, svg {
+  display: block;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #82D174;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+button:hover {
+  color: #82D174;
+}
+
+a:focus, button:focus, input:focus, textarea:focus {
+  outline: dotted 0.1rem #82D174;
+  outline-offset: 0.1rem;
+}
+
+::selection {
+  color: white;
+  background-color: #82D174;
+}
+
+.page {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.page__content {
+  min-height: 100%;
+  flex-grow: 1;
+}
+.page__container {
+  max-width: calc(var(--max-container-width) + 2 * var(--content-padding));
+  margin: 0 auto;
+  padding: 0 var(--content-padding);
+}
+.page__title {
+  font-weight: 700;
+  line-height: 1.4;
+}
+.page__section-title {
+  font-weight: 700;
+  line-height: 1.4;
+}
+.page__button {
+  border-radius: 2rem;
+  padding: 0.8rem 1.6rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(290deg, #53AA48 30%, #82D174 72%);
+  box-shadow: 0px 9px 50px #406D07;
+}
+.page__button:hover {
+  color: white;
+}
+
+.header {
+  z-index: 5;
+  padding: 2rem 0;
+  background-color: black;
+  color: white;
+}
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer {
+  padding: 2rem 0;
+  background-color: black;
+  color: white;
+}
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.d-map {
+  position: relative;
+}
+.d-map__container {
+  height: 1080px;
+}
+.d-map__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 56px 96px 88px;
+  background: linear-gradient(to top, #fff 4%, transparent 30%, transparent 70%, #fff 96%);
+  pointer-events: none;
+}
+.d-map__title {
+  color: #EC6900;
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1.1;
+  pointer-events: all;
+}
+.d-map__places {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 72px;
+}
+.d-map [class*=ymaps-2][class*=-ground-pane] {
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+  /* Firefox 3.5+ */
+  -webkit-filter: grayscale(100%);
+  /* Chrome 19+ & Safari 6+ */
+}
+
+.place {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.place__image-wrapper img {
+  width: 42px;
+  height: auto;
+}
+.place__description {
+  pointer-events: all;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+}
+.place__description h1, .place__description h2, .place__description h3, .place__description h4, .place__description h5, .place__description h6 {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.2;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/main.css">
+
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=ad4bda9d-4f4d-46c6-9ab9-dd00b848d5a0&lang=ru_RU" type="text/javascript">
+  </script>
+
+  <title>TEKO</title>
+</head>
+
+<body>
+  <div
+    class="d-map"
+    data-url="./data/places.json"
+    data-initial-longitude="55.753215"
+    data-initial-latitude="37.622504"
+    data-initial-zoom="4"
+    >
+    <div class="d-map__container" id="js-yandex-map">
+      <!-- Тут карта -->
+    </div>
+    <div class="d-map__overlay">
+      <div class="d-map__title">федеральное покрытие</div>
+      <ul class="d-map__places" id="js-map-list-container">
+      </ul>
+    </div>
+  </div>
+
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>
