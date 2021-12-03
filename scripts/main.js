@@ -21,6 +21,8 @@ function initMap() {
   tekoMap.behaviors.disable('scrollZoom');
 
   _getData(mapContainer, tekoMap);
+
+  _renderRussiaPolygon(tekoMap);
 }
 
 function _getData(mapContainer, map) {
@@ -60,7 +62,7 @@ function _addPlace(map, {coords, image}) {
     iconLayout: 'default#image',
     iconImageHref: image,
     iconImageSize: [40, 40],
-    iconImageOffset: [0, 0]
+    iconImageOffset: [-20, -40]
   };
 
   const placemark = new ymaps.Placemark(coords, placemarkProperties, placemarkOptions);
@@ -81,4 +83,43 @@ function _renderGroupItem(container, {image, count, text}) {
     </li>`;
 
   container.innerHTML += itemHTML;
+}
+
+function _renderRussiaPolygon(map) {
+  fetch('https://nominatim.openstreetmap.org/details.php?osmtype=R&osmid=60189&class=boundary&addressdetails=1&hierarchy=0&group_hierarchy=1&format=json&polygon_geojson=1')
+  .then(res => res.json())
+  .then(data => {
+    console.log(data.geometry.coordinates);
+
+    // ---
+
+    res = data.geometry.coordinates.map(group => {
+      return group.map(innerGroup => {
+        return innerGroup.map(coords => {
+          const newCoords = [coords[1], coords[0]];
+          return newCoords
+        })
+      })
+    });
+
+    // ---
+
+    res.forEach(partCoords => {
+      const polygon = new ymaps.Polygon(
+        partCoords, {
+        hintContent: "Многоугольник"
+        }, {
+        fillColor: '#6699ff',
+        // Делаем полигон прозрачным для событий карты.
+        interactivityModel: 'default#transparent',
+        strokeWidth: 8,
+        opacity: 0.1
+        }
+      );
+      map.geoObjects.add(polygon);
+    })
+  })
+  .catch(err => {
+    console.warn(err);
+  })
 }
