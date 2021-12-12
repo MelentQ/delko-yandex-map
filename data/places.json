@@ -2,6 +2,7 @@
   "groups": [
     {
       "groupLabel": "Отделов продаж",
+      "count": 250,
       "groupIcon": "images/icons/mark--orange.svg",
       "places": [
         {
@@ -22,6 +23,7 @@
     },
     {
       "groupLabel": "Офисов колонных",
+      "count": 250,
       "groupIcon": "images/icons/mark--yellow.svg",
       "places": [
         {

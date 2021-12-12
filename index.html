@@ -18,22 +18,39 @@
 <body>
   <div
     class="d-map"
-    data-url="./data/places.json"
-    data-initial-longitude="59.13086"
-    data-initial-latitude="105.11719"
+    data-url="data/places.json"
+    data-initial-longitude="56.80890"
+    data-initial-latitude="100.25936"
     data-initial-zoom="4"
-    >
+    data-tablet-initial-longitude="55.881325"
+    data-tablet-initial-latitude="53.910357"
+    data-tablet-initial-zoom="4"
+    data-mobile-initial-longitude="55.755819"
+    data-mobile-initial-latitude="37.617644"
+    data-mobile-initial-zoom="3"
+  >
     <div class="d-map__container" id="js-yandex-map">
       <!-- Тут карта -->
     </div>
+    <div class="d-map__blue-filter">
+
+    </div>
     <div class="d-map__overlay">
-      <div class="d-map__title">федеральное покрытие</div>
+      <div class="d-map__header">
+        <h2 class="d-map__title">федеральное покрытие</h2>
+        <img src="images/icons/logo.svg" alt="Logo">
+      </div>
+      
       <ul class="d-map__places" id="js-map-list-container">
       </ul>
     </div>
   </div>
+  <div class="d-map__mobile-places-container">
+    <ul class="d-map__places" id="js-mobile-map-list-container">
+    </ul>
+  </div>
 
-  <script src="scripts/main.js"></script>
+  <script src="scripts/newMap.js"></script>
 </body>
 
 </html>

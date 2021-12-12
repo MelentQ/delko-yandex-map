@@ -1,17 +1,29 @@
 window.addEventListener('load', () => {
-  console.log("Hello, JS!");
-
   ymaps.ready(initMap);
 })
 
 function initMap() {
   const mapContainer = document.querySelector('.d-map');
+  if (!mapContainer) return;
   const map = mapContainer.querySelector('#js-yandex-map');
   if (!map) return;
 
+  const deviceWidth = document.documentElement.clientWidth;
+  let mapCenter = [mapContainer.dataset.initialLongitude, mapContainer.dataset.initialLatitude];
+  let mapZoom = mapContainer.dataset.initialZoom;
+
+  if (deviceWidth <= 1024) {
+    mapCenter = [mapContainer.dataset.tabletInitialLongitude, mapContainer.dataset.tabletInitialLatitude];
+    mapZoom = mapContainer.dataset.tabletInitialZoom;
+  }
+  if (deviceWidth <= 576) {
+    mapCenter = [mapContainer.dataset.mobileInitialLongitude, mapContainer.dataset.mobileInitialLatitude];
+    mapZoom = mapContainer.dataset.mobileInitialZoom;
+  }
+
   const tekoMap = new ymaps.Map(map, {
-    center: [mapContainer.dataset.initialLongitude, mapContainer.dataset.initialLatitude],
-    zoom: mapContainer.dataset.initialZoom,
+    center: mapCenter,
+    zoom: mapZoom,
     controls: []
   }, {
     yandexMapDisablePoiInteractivity: true,
@@ -34,13 +46,20 @@ function _getData(mapContainer, map) {
     })
     .then(data => {
       const listContainer = document.querySelector('#js-map-list-container');
+      const mobileListContainer = document.querySelector('#js-mobile-map-list-container');
 
       data.groups.forEach(group => {
+        const count = group.count || group.places.length;
         _renderGroupItem(listContainer, {
           image: group.groupIcon,
-          count: group.places.length,
+          count: count,
           text: group.groupLabel
-        })
+        });
+        _renderGroupItem(mobileListContainer, {
+          image: group.groupIcon,
+          count: count,
+          text: group.groupLabel
+        });
         
         group.places.forEach(place => {
           _addPlace(map, {
@@ -61,8 +80,8 @@ function _addPlace(map, {coords, image}) {
   const placemarkOptions = {
     iconLayout: 'default#image',
     iconImageHref: image,
-    iconImageSize: [40, 40],
-    iconImageOffset: [-20, -40]
+    iconImageSize: [12, 17],
+    iconImageOffset: [-6, -17]
   };
 
   const placemark = new ymaps.Placemark(coords, placemarkProperties, placemarkOptions);
@@ -89,7 +108,6 @@ function _renderRussiaPolygon(map) {
   fetch('https://nominatim.openstreetmap.org/details.php?osmtype=R&osmid=60189&class=boundary&addressdetails=1&hierarchy=0&group_hierarchy=1&format=json&polygon_geojson=1')
   .then(res => res.json())
   .then(data => {
-    console.log(data.geometry.coordinates);
 
     // ---
 
@@ -106,14 +124,11 @@ function _renderRussiaPolygon(map) {
 
     res.forEach(partCoords => {
       const polygon = new ymaps.Polygon(
-        partCoords, {
-        hintContent: "Многоугольник"
-        }, {
-        fillColor: '#6699ff',
-        // Делаем полигон прозрачным для событий карты.
+        partCoords, {}, {
+        fillColor: '#fff',
         interactivityModel: 'default#transparent',
-        strokeWidth: 8,
-        opacity: 0.1
+        strokeWidth: 0,
+        opacity: 0.5
         }
       );
       map.geoObjects.add(polygon);
