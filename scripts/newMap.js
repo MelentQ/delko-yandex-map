@@ -104,7 +104,7 @@ function _renderGroupItem(container, {image, count, text}) {
   container.innerHTML += itemHTML;
 }
 
-function _renderRussiaPolygon(map) {
+async function _renderRussiaPolygon(map) {
   fetch('https://nominatim.openstreetmap.org/details.php?osmtype=R&osmid=60189&class=boundary&addressdetails=1&hierarchy=0&group_hierarchy=1&format=json&polygon_geojson=1')
   .then(res => res.json())
   .then(data => {
